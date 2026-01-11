@@ -1,8 +1,9 @@
 using UnityEngine;
 using System;
-using EntityStats;
+using Entities.StatsSystem;
 using System.Collections.Generic;
 using Random = UnityEngine.Random;
+
 namespace Entities
 {
     public abstract class BaseEntity : MonoBehaviour
@@ -64,6 +65,10 @@ namespace Entities
         public void AddStatModifier(StatModifier modifier)
         {
             stats.AddModifier(modifier);
+        }
+        public void RemoveStatModifier(StatModifier modifier)
+        {
+            stats.RemoveModifier(modifier);
         }
         #endregion
     }

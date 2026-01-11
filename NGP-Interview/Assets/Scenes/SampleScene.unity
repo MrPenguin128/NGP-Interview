@@ -673,6 +673,7 @@ GameObject:
   - component: {fileID: 1109500161}
   - component: {fileID: 1109500165}
   - component: {fileID: 1109500160}
+  - component: {fileID: 1109500166}
   - component: {fileID: 1109500164}
   m_Layer: 7
   m_Name: Player
@@ -841,6 +842,38 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: d095e2fc-8e7b-4d4b-a733-d197c1b9796d
     m_ActionName: UI/New action
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1109500166}
+        m_TargetAssemblyTypeName: InventorySystem.Inventory, Assembly-CSharp
+        m_MethodName: Equip
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 8dca3826-5784-41bc-b91e-291ac2e3ba49
+    m_ActionName: 'Gameplay/Equip[/Keyboard/k]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1109500166}
+        m_TargetAssemblyTypeName: InventorySystem.Inventory, Assembly-CSharp
+        m_MethodName: Unequip
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 7af975d7-9eec-41d0-8556-62013038444f
+    m_ActionName: 'Gameplay/Unequip[/Keyboard/l]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Gameplay
@@ -875,6 +908,22 @@ MonoBehaviour:
   comboData: {fileID: 11400000, guid: 84dd858dbf815944ba9ebd1e5c5bf8c6, type: 2}
   drawGizmos: 1
   comboIndexDebug: 5
+--- !u!114 &1109500166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1109500159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f002e2e74e3ac84c88bee43406ef24a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Inventory.Inventory
+  slotCount: 20
+  equippedWeapon: {fileID: 0}
+  equippedChestplate: {fileID: 0}
+  equippedBoots: {fileID: 0}
 --- !u!1 &1195742757
 GameObject:
   m_ObjectHideFlags: 0

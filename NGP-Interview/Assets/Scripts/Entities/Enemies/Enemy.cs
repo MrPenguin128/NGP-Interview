@@ -1,7 +1,9 @@
 using UnityEngine;
 using UnityEngine.AI;
-using EntityStats;
+using Entities.StatsSystem;
+using WaveSystem;
 using System.Collections.Generic;
+using InventorySystem;
 
 namespace Entities.Enemies
 {
@@ -56,6 +58,7 @@ namespace Entities.Enemies
             WaveManager.Instance.OnEnemyKilled(data, this);
             gameObject.SetActive(false);
             enabled = false;
+            GameManager.Player.Inventory.AddItem(ItemDatabase.Instance.GetRandom().Id, Random.Range(0,200));
         }
         #region Stats
         protected virtual void OnChangeMoveSpeed(float obj)

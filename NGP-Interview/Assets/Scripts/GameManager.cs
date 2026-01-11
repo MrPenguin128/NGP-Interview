@@ -1,6 +1,7 @@
 using Entities.Player;
 using System.Collections;
 using System.ComponentModel.Design;
+using WaveSystem;
 using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
@@ -9,7 +10,7 @@ public class GameManager : Singleton<GameManager>
     [Header("Waves Settings")]
     [SerializeField] int maxEnemiesSpawned;
     [SerializeField] float timeBetweenWaves;
-
+    Player p;
     public int MaxEnemiesSpawned => maxEnemiesSpawned;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -50,6 +51,7 @@ public class GameManager : Singleton<GameManager>
             return;
         }
         Player = player;
+        Instance.p = Player;
     }
     public static void Unregister(Player player)
     {

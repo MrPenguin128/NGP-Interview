@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace EntityStats
+namespace Entities.StatsSystem
 {
     //Represents the container of all stats of a entity
     //Can have exclusive stats added, edited, and have modifiers added too
@@ -47,6 +47,12 @@ namespace EntityStats
 
             statsList.Find(x => x.Type == modifier.Stat).Value.AddModifier(modifier);
         }
+        public void RemoveModifier(StatModifier modifier)
+        {
+            var stat = statsList.Find(x => x.Value.Modifiers.Contains(modifier));
+            if (stat != null)
+                stat.Value.RemoveModifier(modifier);
+        }
 
         public void Tick(float deltaTime)
         {
@@ -77,7 +83,7 @@ namespace EntityStats
     public class StatValue
     {
         public float BaseValue;
-        [SerializeField] List<StatModifier> modifiers = new List<StatModifier>();
+        public List<StatModifier> Modifiers = new List<StatModifier>();
 
         public event Action<float> OnValueChanged;
         public float Value
@@ -88,7 +94,7 @@ namespace EntityStats
                 float percentAdd = 0f;
                 float percentMul = 1f;
 
-                foreach (var mod in modifiers)
+                foreach (var mod in Modifiers)
                 {
                     switch (mod.Type)
                     {
@@ -114,21 +120,21 @@ namespace EntityStats
 
         public void AddModifier(StatModifier modifier)
         {
-            modifiers.Add(modifier);
+            Modifiers.Add(modifier);
             OnValueChanged?.Invoke(Value);
         }
 
         public void RemoveModifier(StatModifier modifier)
         {
-            modifiers.Remove(modifier);
+            Modifiers.Remove(modifier);
             OnValueChanged?.Invoke(Value);
         }
 
         public void Tick(float deltaTime)
         {
-            for (int i = modifiers.Count - 1; i >= 0; i--)
+            for (int i = Modifiers.Count - 1; i >= 0; i--)
             {
-                var mod = modifiers[i];
+                var mod = Modifiers[i];
                 if (!mod.IsTemporary)
                     continue;
 

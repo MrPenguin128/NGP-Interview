@@ -1,6 +1,7 @@
 using UnityEngine;
-using EntityStats;
+using Entities.StatsSystem;
 using System.Collections.Generic;
+using InventorySystem;
 
 namespace Entities.Player
 {
@@ -8,6 +9,7 @@ namespace Entities.Player
     //Contains all the player Stats, Actions, and equipped Items
     public class Player : BaseEntity
     {
+        Inventory inventory;
         [Header("Base Stats Values")]
         [SerializeField] protected float baseDamage;
         [SerializeField] protected float baseMoveSpeed;
@@ -23,7 +25,6 @@ namespace Entities.Player
         int currentComboIndex;
         float currentAttackCooldown;
         float currentComboTime;
-
         [Header("Debug")]
         [SerializeField] bool drawGizmos = true;
         [SerializeField] int comboIndexDebug;
@@ -39,11 +40,13 @@ namespace Entities.Player
         public float CritDamage => GetStatValue(StatType.CritDamage);
         #endregion
         public bool IsAttacking { get; private set; }
+        public Inventory Inventory => inventory;
         #endregion
         protected override void Awake()
         {
             base.Awake();
             GameManager.RegisterPlayer(this);
+            inventory = GetComponent<Inventory>();
         }
         protected override void Update()
         {
@@ -51,6 +54,7 @@ namespace Entities.Player
             HandleComboReset();
             HandleAttackCooldown();
         }
+        #region Stats
         protected override void InitializeStats()
         {
             stats.Initialize(new Dictionary<StatType, float>
@@ -65,13 +69,19 @@ namespace Entities.Player
                 { StatType.CritDamage, baseCritDamage },
             });
         }
-
+        public override void TakeDamage(float amount)
+        {
+            amount -= Armor;
+            base.TakeDamage(Mathf.Max(amount, 0));
+        }
+        #endregion
+        #region Attack
         //Called from the Player Movement - Attack input method
         //Responsible to handle only the physics side of the attacks
         //Animations and movement are handled in the Player Movement method
         public void Attack()
         {
-            if (!canAttack) return;
+            if (!canAttack || comboData == null) return;
             canAttack = false;
             IsAttacking = true;
             Vector3 origin = transform.position;
@@ -109,6 +119,10 @@ namespace Entities.Player
             currentComboTime = comboData.ComboResetTime;
         }
 
+        public void SetComboData(ComboDataObject comboData)
+        {
+            this.comboData = comboData;
+        }
         void HandleAttackCooldown()
         {
             if (currentAttackCooldown > 0)
@@ -134,7 +148,7 @@ namespace Entities.Player
 
             return angleToTarget <= attackAngle;
         }
-
+        #endregion
 
         #region Debug
         private void OnDrawGizmosSelected()
