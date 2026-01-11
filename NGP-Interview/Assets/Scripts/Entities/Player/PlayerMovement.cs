@@ -10,19 +10,12 @@ namespace Entities.Player
         Player player;
         [SerializeField] Rigidbody rb;
         [Header("Movement")]
-        [SerializeField] float moveSpeed;
         [SerializeField] float rotationSpeed;
-        [Header("Attack")]
-        [SerializeField] float attackMoveMultiplier;
-        [SerializeField] float attackDuration;
         [Header("Dash")]
         [SerializeField] float dashSpeed;
         [SerializeField] float dashDuration;
         [SerializeField] float dashCooldown;
         Vector2 moveInput;
-        //Attack
-        float attackTimer;
-        bool isAttacking;
         //Dash
         bool isDashing;
         float dashTimer;
@@ -46,7 +39,6 @@ namespace Entities.Player
             }
             HandleMovement();
             HandleRotation();
-            HandleAttackTimer();
         }
 
         #region Movement
@@ -57,10 +49,8 @@ namespace Entities.Player
         //Move the player based on the input direction
         private void HandleMovement()
         {
-            float speedMultiplier = isAttacking ? attackMoveMultiplier : 1f;
-
             Vector3 moveDir = new Vector3(moveInput.x, 0f, moveInput.y);
-            Vector3 velocity = moveDir * moveSpeed * speedMultiplier;
+            Vector3 velocity = moveDir * player.MoveSpeed;
             velocity.y = rb.linearVelocity.y;
 
             rb.linearVelocity = velocity;
@@ -70,7 +60,7 @@ namespace Entities.Player
         //Rotate te player based on the input direction or attack direction
         private void HandleRotation()
         {
-            if (isAttacking)
+            if (player.IsAttacking)
             {
                 RotateTowardsMouse();
                 return;
@@ -133,8 +123,6 @@ namespace Entities.Player
                 dashDirection = new Vector3(moveInput.x, 0f, moveInput.y).normalized;
             else
                 dashDirection = transform.forward;
-
-            isAttacking = false;
         }
 
         private void HandleDash()
@@ -159,22 +147,7 @@ namespace Entities.Player
         {
             if (!context.started)
                 return;
-
-            isAttacking = true;
-            attackTimer = attackDuration;
-
             player.Attack();
-        }
-        private void HandleAttackTimer()
-        {
-            if (!isAttacking)
-                return;
-
-            attackTimer -= Time.fixedDeltaTime;
-            if (attackTimer <= 0f)
-            {
-                isAttacking = false;
-            }
         }
         #endregion
     }
