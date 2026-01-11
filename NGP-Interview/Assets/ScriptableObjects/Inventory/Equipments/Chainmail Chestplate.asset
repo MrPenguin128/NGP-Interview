@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 731e78fc9c10604468cb277d44ca0eca, type: 3}
   m_Name: Chainmail Chestplate
   m_EditorClassIdentifier: Assembly-CSharp::InventorySystem.ChestplateObject
-  Id: leather_chestplate
-  DisplayName: 
+  Id: chainmail_chestplate
+  DisplayName: Chainmail Chestplate
   Icon: {fileID: -494993181, guid: 6300602bbf76ae743980b474105c04c3, type: 3}
   Stackable: 0
   MaxStack: 1
+  type: 1
   modifiers:
   - stat: 0
     value: 20

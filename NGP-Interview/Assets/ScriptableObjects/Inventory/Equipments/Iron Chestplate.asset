@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: Iron Chestplate
   m_EditorClassIdentifier: Assembly-CSharp::InventorySystem.ChestplateObject
   Id: iron_chestplate
-  DisplayName: 
+  DisplayName: Iron Chestplate
   Icon: {fileID: -341063523, guid: 6300602bbf76ae743980b474105c04c3, type: 3}
   Stackable: 0
   MaxStack: 1
+  type: 1
   modifiers:
   - stat: 0
     value: 40

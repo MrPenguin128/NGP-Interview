@@ -17,5 +17,10 @@ namespace InventorySystem
             base.OnEquip(entity);
             (entity as Player).SetComboData(comboData);
         }
+        public override void OnUnequip(BaseEntity entity)
+        {
+            base.OnUnequip(entity);
+            (entity as Player).SetComboData(null);
+        }
     }
 }

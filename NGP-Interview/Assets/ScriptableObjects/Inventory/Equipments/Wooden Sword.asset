@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: Wooden Sword
   m_EditorClassIdentifier: Assembly-CSharp::InventorySystem.WeaponObject
   Id: wooden_sword
-  DisplayName: 
+  DisplayName: Wooden Sword
   Icon: {fileID: -1668237034, guid: 6300602bbf76ae743980b474105c04c3, type: 3}
   Stackable: 0
   MaxStack: 1
+  type: 0
   modifiers:
   - stat: 1
     value: 10

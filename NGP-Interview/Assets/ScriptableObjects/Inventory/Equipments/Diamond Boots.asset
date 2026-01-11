@@ -12,17 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c36e7b017e352454d8ad4ea76ad11dc9, type: 3}
   m_Name: Diamond Boots
   m_EditorClassIdentifier: Assembly-CSharp::InventorySystem.BootsObject
-  Id: iron_boots
-  DisplayName: 
-  Icon: {fileID: -1944775168, guid: 6300602bbf76ae743980b474105c04c3, type: 3}
+  Id: diamond_boots
+  DisplayName: Diamond Boots
+  Icon: {fileID: 1426281857, guid: 6300602bbf76ae743980b474105c04c3, type: 3}
   Stackable: 0
   MaxStack: 1
+  type: 2
   modifiers:
   - stat: 5
-    value: 10
+    value: 15
     type: 0
     Duration: 0
   - stat: 2
-    value: 0.25
+    value: 0.5
     type: 1
     Duration: 0

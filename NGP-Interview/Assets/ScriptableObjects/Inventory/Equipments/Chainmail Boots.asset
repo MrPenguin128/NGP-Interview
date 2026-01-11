@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c36e7b017e352454d8ad4ea76ad11dc9, type: 3}
   m_Name: Chainmail Boots
   m_EditorClassIdentifier: Assembly-CSharp::InventorySystem.BootsObject
-  Id: leather_boots
-  DisplayName: 
+  Id: chainmail_boots
+  DisplayName: Chainmail Boots
   Icon: {fileID: 1795447934, guid: 6300602bbf76ae743980b474105c04c3, type: 3}
   Stackable: 0
   MaxStack: 1
+  type: 2
   modifiers:
   - stat: 5
     value: 5

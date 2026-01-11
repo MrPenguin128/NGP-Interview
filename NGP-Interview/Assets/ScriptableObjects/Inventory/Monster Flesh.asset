@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24e0f5d6d92c67a45ab81a0381cfa7ee, type: 3}
   m_Name: Monster Flesh
   m_EditorClassIdentifier: Assembly-CSharp::Inventory.ItemObject
-  Id: monsterflesh
-  DisplayName: 
+  Id: monster_flesh
+  DisplayName: Monster Flesh
   Icon: {fileID: -1582834004, guid: 6300602bbf76ae743980b474105c04c3, type: 3}
   Stackable: 1
   MaxStack: 99
