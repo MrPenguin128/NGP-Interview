@@ -5,6 +5,9 @@ namespace InventorySystem
     [CreateAssetMenu(fileName = "BootsObject", menuName = "Scriptable Objects/Inventory/Items/Boots")]
     public class BootsObject : EquipmentObject
     {
-
+        private void Awake()
+        {
+            type = EquipmentType.Boots;
+        }
     }
 }

@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c36e7b017e352454d8ad4ea76ad11dc9, type: 3}
+  m_Name: Iron Boots
+  m_EditorClassIdentifier: Assembly-CSharp::InventorySystem.BootsObject
+  Id: iron_boots
+  DisplayName: 
+  Icon: {fileID: -1944775168, guid: 6300602bbf76ae743980b474105c04c3, type: 3}
+  Stackable: 0
+  MaxStack: 1
+  modifiers:
+  - stat: 5
+    value: 10
+    type: 0
+    Duration: 0
+  - stat: 2
+    value: 0.25
+    type: 1
+    Duration: 0

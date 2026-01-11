@@ -10,14 +10,7 @@ namespace Entities.Player
     public class Player : BaseEntity
     {
         Inventory inventory;
-        [Header("Base Stats Values")]
-        [SerializeField] protected float baseDamage;
-        [SerializeField] protected float baseMoveSpeed;
-        [SerializeField] protected float baseAttackSpeed;
-        [SerializeField] protected float baseAttackRange;
-        [SerializeField] protected float baseArmor;
-        [SerializeField] protected float baseCritChance;
-        [SerializeField] protected float baseCritDamage;
+        [SerializeField] PlayerSettingsObject playerSettings;
         [Header("Attack Settings")] 
         [SerializeField] LayerMask damageableMask;
         [SerializeField] ComboDataObject comboData;
@@ -30,6 +23,7 @@ namespace Entities.Player
         [SerializeField] int comboIndexDebug;
 
         #region Properties
+        public PlayerSettingsObject PlayerSettings => playerSettings;
         #region Stats
         public float Damage => GetStatValue(StatType.Damage);
         public float MoveSpeed => GetStatValue(StatType.MoveSpeed);
@@ -60,13 +54,13 @@ namespace Entities.Player
             stats.Initialize(new Dictionary<StatType, float>
             {
                 { StatType.MaxHealth, baseMaxHealth },
-                { StatType.Damage, baseDamage },
-                { StatType.MoveSpeed, baseMoveSpeed },
-                { StatType.AttackSpeed, baseAttackSpeed },
-                { StatType.AttackRange, baseAttackRange },
-                { StatType.Armor, baseArmor },
-                { StatType.CritChance, baseCritChance },
-                { StatType.CritDamage, baseCritDamage },
+                { StatType.Damage, PlayerSettings.BaseDamage },
+                { StatType.MoveSpeed, PlayerSettings.BaseMoveSpeed },
+                { StatType.AttackSpeed, PlayerSettings.BaseAttackSpeed },
+                { StatType.AttackRange, PlayerSettings.BaseAttackRange },
+                { StatType.Armor, PlayerSettings.BaseArmor },
+                { StatType.CritChance, PlayerSettings.BaseCritChance },
+                { StatType.CritDamage, PlayerSettings.BaseCritDamage },
             });
         }
         public override void TakeDamage(float amount)
@@ -157,7 +151,7 @@ namespace Entities.Player
             if (comboData == null || comboIndexDebug >= comboData.hits.Length || comboIndexDebug < 0) return;
 
             Gizmos.color = Color.red;
-            var range = AttackRange > 0 ? AttackRange : baseAttackRange;
+            var range = AttackRange > 0 ? AttackRange : PlayerSettings?.BaseAttackRange ?? 0;
             range *= comboData.hits[comboIndexDebug].AttackRangeMultiplier;
             Gizmos.DrawWireSphere(transform.position, range);
 

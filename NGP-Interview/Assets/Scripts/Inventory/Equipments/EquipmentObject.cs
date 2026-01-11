@@ -6,7 +6,9 @@ namespace InventorySystem
 {
     public class EquipmentObject : ItemObject
     {
+        [SerializeField] protected EquipmentType type;
         public StatModifier[] modifiers;
+        public EquipmentType Type => type;
         private void Awake()
         {
             Stackable = false;
@@ -27,5 +29,11 @@ namespace InventorySystem
             }
 
         }
+    }
+    public enum EquipmentType
+    {
+        Weapon,
+        Chestplate,
+        Boots,
     }
 }

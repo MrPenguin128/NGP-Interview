@@ -12,10 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 455e6e9d604516f4285569c79b52cc61, type: 3}
   m_Name: Wooden Sword
   m_EditorClassIdentifier: Assembly-CSharp::InventorySystem.WeaponObject
-  Id: 
+  Id: wooden_sword
   DisplayName: 
-  Icon: {fileID: 0}
+  Icon: {fileID: -1668237034, guid: 6300602bbf76ae743980b474105c04c3, type: 3}
   Stackable: 0
   MaxStack: 1
-  modifiers: []
-  comboData: {fileID: 0}
+  modifiers:
+  - stat: 1
+    value: 10
+    type: 0
+    Duration: 0
+  comboData: {fileID: 11400000, guid: a31fd2203b2712f408981c8a71f9208e, type: 2}

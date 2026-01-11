@@ -8,6 +8,10 @@ namespace InventorySystem
     public class WeaponObject : EquipmentObject
     {
         [SerializeField] ComboDataObject comboData;
+        private void Awake()
+        {
+            type = EquipmentType.Weapon;
+        }
         public override void OnEquip(BaseEntity entity)
         {
             base.OnEquip(entity);

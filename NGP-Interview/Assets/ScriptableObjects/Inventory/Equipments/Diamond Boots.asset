@@ -10,11 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c36e7b017e352454d8ad4ea76ad11dc9, type: 3}
-  m_Name: Leather Boots
+  m_Name: Diamond Boots
   m_EditorClassIdentifier: Assembly-CSharp::InventorySystem.BootsObject
-  Id: leather_boots
+  Id: iron_boots
   DisplayName: 
-  Icon: {fileID: 0}
+  Icon: {fileID: -1944775168, guid: 6300602bbf76ae743980b474105c04c3, type: 3}
   Stackable: 0
   MaxStack: 1
-  modifiers: []
+  modifiers:
+  - stat: 5
+    value: 10
+    type: 0
+    Duration: 0
+  - stat: 2
+    value: 0.25
+    type: 1
+    Duration: 0
