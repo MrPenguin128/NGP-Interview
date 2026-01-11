@@ -2,21 +2,17 @@ using UnityEngine;
 using System;
 using EntityStats;
 using System.Collections.Generic;
-
+using Random = UnityEngine.Random;
 namespace Entities
 {
     public abstract class BaseEntity : MonoBehaviour
     {
-        [Header("Base Stats")]
-        protected Stats stats = new Stats();
+        [Header("Stats")]
+        [SerializeField] protected Stats stats = new Stats();
+        [SerializeField] protected float currentHealth;
         [SerializeField] protected float baseMaxHealth;
-        [SerializeField] protected float baseDamage;
-        [SerializeField] protected float baseMoveSpeed;
-        protected float currentHealth;
 
-        public float MaxHealth => GetStat(StatType.MaxHealth);
-        public float Damage => GetStat(StatType.Damage);
-        public float MoveSpeed => GetStat(StatType.MoveSpeed);
+        public float MaxHealth => GetStatValue(StatType.MaxHealth);
 
         public event Action OnDeath;
         public event Action<float> OnDamageTaken;
@@ -43,8 +39,6 @@ namespace Entities
             stats.Initialize(new Dictionary<StatType, float>
             {
                 { StatType.MaxHealth, baseMaxHealth },
-                { StatType.Damage, baseDamage },
-                { StatType.MoveSpeed, baseMoveSpeed }
             });
         }
 
@@ -62,12 +56,11 @@ namespace Entities
         protected virtual void Die()
         {
             OnDeath?.Invoke();
-            Destroy(gameObject);
         }
         #endregion
 
         #region Stats
-        public float GetStat(StatType type) => stats.Get(type);
+        public float GetStatValue(StatType type) => stats.GetValue(type);
         public void AddStatModifier(StatModifier modifier)
         {
             stats.AddModifier(modifier);

@@ -1,14 +1,22 @@
 using Entities.Player;
+using System.Collections;
+using System.ComponentModel.Design;
 using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
 {
     public static Player Player { get; private set; }
+    [Header("Waves Settings")]
+    [SerializeField] int maxEnemiesSpawned;
+    [SerializeField] float timeBetweenWaves;
+
+    public int MaxEnemiesSpawned => maxEnemiesSpawned;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        WaveManager.Instance.OnWaveCompleted += CheckNextWave;
+        StartCoroutine(StartWave());
     }
 
     // Update is called once per frame
@@ -16,7 +24,22 @@ public class GameManager : Singleton<GameManager>
     {
         
     }
-
+    void CheckNextWave(int currentWave)
+    {
+        if (currentWave < WaveManager.Instance.WaveLenght)
+            StartCoroutine(StartWave());
+        else
+            GameEnding();
+    }
+    IEnumerator StartWave()
+    {
+        yield return new WaitForSeconds(timeBetweenWaves);
+        StartCoroutine(WaveManager.Instance.SpawnNextWave());
+    }
+    void GameEnding()
+    {
+        Debug.Log("You Win!");
+    }
     //Static reference to the Player entity to maintain easy and simple access.
     #region Player Reference
     public static void RegisterPlayer(Player player)
@@ -34,4 +57,12 @@ public class GameManager : Singleton<GameManager>
             Player = null;
     }
     #endregion
+
+    public enum GameState
+    {
+        Waiting,
+        EnemyWave,
+        BetweenWaves,
+        Ending
+    }
 }

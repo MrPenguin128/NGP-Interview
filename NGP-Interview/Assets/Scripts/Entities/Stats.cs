@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace EntityStats
@@ -9,38 +10,62 @@ namespace EntityStats
     [Serializable]
     public class Stats
     {
-        [SerializeField] Dictionary<StatType, StatValue> stats = new();
+        public List<StatPair> statsList = new List<StatPair>();
 
         public void Initialize(Dictionary<StatType, float> baseStats)
         {
-            stats.Clear();
+            statsList.Clear();
             foreach (var stat in baseStats)
             {
-                stats[stat.Key] = new StatValue { BaseValue = stat.Value };
+                statsList.Add(new StatPair(stat.Key, new StatValue { BaseValue = stat.Value }));
             }
         }
 
-        public float Get(StatType type)
+        public StatValue GetStat(StatType type)
         {
-            if (!stats.TryGetValue(type, out var stat))
-                return 0f;
-
-            return stat.Value;
+            for (int i = 0; i < statsList.Count; i++)
+            {
+                if (statsList[i].Type == type)
+                    return statsList[i].Value;
+            }
+            return null;
+        }
+        public float GetValue(StatType type)
+        {
+            for (int i = 0; i < statsList.Count; i++)
+            {
+                if (statsList[i].Type == type)
+                    return statsList[i].Value.Value;
+            }
+            return 0f;
         }
 
         public void AddModifier(StatModifier modifier, bool createIfInexistent = true)
         {
-            if (!stats.ContainsKey(modifier.Stat) && createIfInexistent)
-                stats[modifier.Stat] = new StatValue();
+            if (!statsList.Any(x => x.Type == modifier.Stat) && createIfInexistent)
+                statsList.Add(new StatPair(modifier.Stat, new StatValue()));
 
-            stats[modifier.Stat].AddModifier(modifier);
+            statsList.Find(x => x.Type == modifier.Stat).Value.AddModifier(modifier);
         }
 
         public void Tick(float deltaTime)
         {
-            foreach (var stat in stats.Values)
+            foreach (var stat in statsList)
             {
-                stat.Tick(deltaTime);
+                stat.Value.Tick(deltaTime);
+            }
+        }
+
+        [Serializable]
+        public class StatPair
+        {
+            public StatType Type;
+            public StatValue Value;
+
+            public StatPair(StatType key,StatValue newValue)
+            {
+                Type = key;
+                Value = newValue;
             }
         }
     }
@@ -52,8 +77,9 @@ namespace EntityStats
     public class StatValue
     {
         public float BaseValue;
-        List<StatModifier> modifiers = new List<StatModifier>();
+        [SerializeField] List<StatModifier> modifiers = new List<StatModifier>();
 
+        public event Action<float> OnValueChanged;
         public float Value
         {
             get
@@ -89,11 +115,13 @@ namespace EntityStats
         public void AddModifier(StatModifier modifier)
         {
             modifiers.Add(modifier);
+            OnValueChanged?.Invoke(Value);
         }
 
         public void RemoveModifier(StatModifier modifier)
         {
             modifiers.Remove(modifier);
+            OnValueChanged?.Invoke(Value);
         }
 
         public void Tick(float deltaTime)
@@ -106,7 +134,9 @@ namespace EntityStats
 
                 mod.RemainingTime -= deltaTime;
                 if (mod.RemainingTime <= 0f)
-                    modifiers.RemoveAt(i);
+                {
+                    RemoveModifier(mod);
+                }
             }
         }
     }
@@ -118,10 +148,10 @@ namespace EntityStats
     [Serializable]
     public class StatModifier
     {
-        StatType stat;
-        float value;
-        StatModifierType type;
-        float Duration; // <= 0 = permanent
+        [SerializeField] StatType stat;
+        [SerializeField] float value;
+        [SerializeField] StatModifierType type;
+        [SerializeField] float Duration; // <= 0 = permanent
 
         public StatType Stat => stat;
         public float Value => value;
@@ -151,8 +181,10 @@ namespace EntityStats
         Damage,
         MoveSpeed,
         AttackSpeed,
+        AttackRange,
         Armor,
         CritChance,
+        CritDamage,
     }
 
 }
