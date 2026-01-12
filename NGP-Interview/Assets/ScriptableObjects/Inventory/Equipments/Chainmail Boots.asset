@@ -13,8 +13,11 @@ MonoBehaviour:
   m_Name: Chainmail Boots
   m_EditorClassIdentifier: Assembly-CSharp::InventorySystem.BootsObject
   Id: chainmail_boots
-  DisplayName: Chainmail Boots
   Icon: {fileID: 1795447934, guid: 6300602bbf76ae743980b474105c04c3, type: 3}
+  DisplayName: Chainmail Boots
+  Description: 'Armor: +{[ARM]}
+
+    Move Speed: +{[MSP]}'
   Stackable: 0
   MaxStack: 1
   type: 2

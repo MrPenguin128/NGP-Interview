@@ -7,8 +7,9 @@ namespace InventorySystem
     {
         public string Id;
         [Header("UI")]
-        public string DisplayName;
         public Sprite Icon;
+        public string DisplayName;
+        [TextArea(3, 6)] public string Description;
 
         [Header("Stack Settings")]
         public bool Stackable = true;

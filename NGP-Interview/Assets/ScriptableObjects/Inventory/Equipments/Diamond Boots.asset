@@ -13,8 +13,11 @@ MonoBehaviour:
   m_Name: Diamond Boots
   m_EditorClassIdentifier: Assembly-CSharp::InventorySystem.BootsObject
   Id: diamond_boots
-  DisplayName: Diamond Boots
   Icon: {fileID: 1426281857, guid: 6300602bbf76ae743980b474105c04c3, type: 3}
+  DisplayName: Diamond Boots
+  Description: 'Armor: +{[ARM]}
+
+    Move Speed: +{[MSP]}'
   Stackable: 0
   MaxStack: 1
   type: 2

@@ -13,8 +13,11 @@ MonoBehaviour:
   m_Name: Diamond Sword
   m_EditorClassIdentifier: Assembly-CSharp::InventorySystem.WeaponObject
   Id: diamond_sword
-  DisplayName: Diamond Sword
   Icon: {fileID: 1627856900, guid: 6300602bbf76ae743980b474105c04c3, type: 3}
+  DisplayName: Diamond Sword
+  Description: 'Damage: +{[DMG]}
+
+    Attack Speed: +{[ASP]}'
   Stackable: 0
   MaxStack: 1
   type: 0

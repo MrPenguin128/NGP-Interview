@@ -13,8 +13,11 @@ MonoBehaviour:
   m_Name: Chainmail Chestplate
   m_EditorClassIdentifier: Assembly-CSharp::InventorySystem.ChestplateObject
   Id: chainmail_chestplate
-  DisplayName: Chainmail Chestplate
   Icon: {fileID: -494993181, guid: 6300602bbf76ae743980b474105c04c3, type: 3}
+  DisplayName: Chainmail Chestplate
+  Description: 'Max Health: +{[HPM]}
+
+    Armor: +{[ARM]}'
   Stackable: 0
   MaxStack: 1
   type: 1

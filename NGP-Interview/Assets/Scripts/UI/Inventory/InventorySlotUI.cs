@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace InventorySystem.UI
 {
-    public class InventorySlotUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler
+    public class InventorySlotUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler, IPointerEnterHandler, IPointerExitHandler
     {
         [SerializeField] SlotType type;
         [SerializeField] private Image icon;
@@ -14,7 +14,6 @@ namespace InventorySystem.UI
         public int SlotIndex { get; private set; }
 
         private InventoryUI inventoryUI;
-        private RectTransform rectTransform;
         private CanvasGroup canvasGroup;
 
         public void Initialize(int index, InventoryUI ui)
@@ -22,7 +21,6 @@ namespace InventorySystem.UI
             SlotIndex = index;
             inventoryUI = ui;
 
-            rectTransform = GetComponent<RectTransform>();
             canvasGroup = GetComponent<CanvasGroup>();
         }
 
@@ -108,6 +106,45 @@ namespace InventorySystem.UI
 
         #endregion
 
+        #region Tooltip
+        public void OnPointerEnter(PointerEventData eventData)
+        {
+            InventorySlot slot;
+            if (SlotIndex < 0)
+            {
+                if (inventoryUI.TryGetEquipmentTypeFromSlot(SlotIndex, out EquipmentType type))
+                {
+                    switch (type)
+                    {
+                        case EquipmentType.Weapon:
+                            slot = inventoryUI.Inventory.Data.equippedWeapon;
+                            break;
+                        case EquipmentType.Chestplate:
+                            slot = inventoryUI.Inventory.Data.equippedChestplate;
+                            break;
+                        case EquipmentType.Boots:
+                            slot = inventoryUI.Inventory.Data.equippedBoots;
+                            break;
+                        default:
+                            return;
+                    }
+                }
+                else
+                    return;
+            }
+            else
+                slot = inventoryUI.Inventory.Data.Slots[SlotIndex];
+            if (slot.IsEmpty)
+                return;
+
+            ItemTooltipUI.Instance.Show(ItemDatabase.Instance.Get(slot.ItemId));
+        }
+
+        public void OnPointerExit(PointerEventData eventData)
+        {
+            ItemTooltipUI.Instance.Hide();
+        }
+        #endregion
         enum SlotType
         {
             EquipmentSlot,
