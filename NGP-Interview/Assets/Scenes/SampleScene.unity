@@ -841,6 +841,65 @@ MonoBehaviour:
   mouseOffsetStrength: 2.5
   mouseOffsetSmooth: 6
   followSmooth: 8
+--- !u!1 &403968418
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 403968420}
+  - component: {fileID: 403968419}
+  m_Layer: 0
+  m_Name: SaveManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &403968419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 403968418}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6506e5121ae32834294721c703eba4d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SaveManager
+  inventoryData:
+    SlotCount: 0
+    equippedWeapon:
+      SlotIndex: 0
+      ItemId: 
+      Quantity: 0
+    equippedChestplate:
+      SlotIndex: 0
+      ItemId: 
+      Quantity: 0
+    equippedBoots:
+      SlotIndex: 0
+      ItemId: 
+      Quantity: 0
+    Slots: []
+--- !u!4 &403968420
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 403968418}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1925.1179, y: 1088.1752, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -2088,6 +2147,38 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: d095e2fc-8e7b-4d4b-a733-d197c1b9796d
     m_ActionName: UI/New action
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1109500160}
+        m_TargetAssemblyTypeName: Entities.Player.PlayerMovement, Assembly-CSharp
+        m_MethodName: Save
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: b32af144-e4a1-442d-9953-08c65b4feaeb
+    m_ActionName: 'Gameplay/Save[/Keyboard/k]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1109500160}
+        m_TargetAssemblyTypeName: Entities.Player.PlayerMovement, Assembly-CSharp
+        m_MethodName: Load
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: a6828406-447c-441a-ba6b-bec9b6736295
+    m_ActionName: 'Gameplay/Load[/Keyboard/l]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Gameplay
@@ -3067,7 +3158,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.0009668919}
+  m_AnchoredPosition: {x: 0, y: 0.0007793286}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1745296741
@@ -3506,7 +3597,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1217015076}
   m_Direction: 2
   m_Value: 0
-  m_Size: 1
+  m_Size: 0.9999981
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -4084,3 +4175,4 @@ SceneRoots:
   - {fileID: 1109500163}
   - {fileID: 1550355292}
   - {fileID: 893948771}
+  - {fileID: 403968420}

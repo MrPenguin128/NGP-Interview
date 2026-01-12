@@ -26,6 +26,18 @@ namespace InventorySystem
             player = GameManager.Player;
             InitializeEquipment();
         }
+        public void LoadData(InventoryData newData)
+        {
+            //Loads the equipment data before loading, so no item is duplicated
+            if (newData.equippedWeapon != null)
+                EquipItem(newData.equippedWeapon.ItemId);
+            if (newData.equippedChestplate != null)
+                EquipItem(newData.equippedChestplate.ItemId);
+            if (newData.equippedBoots != null)
+                EquipItem(newData.equippedBoots.ItemId);
+            Data = newData;
+            InventoryUI.Instance.Refresh();
+        }
 
         #region Item Handle
         public bool AddItem(string itemId, int amount = 1) => AddItem(database.Get(itemId), amount);
