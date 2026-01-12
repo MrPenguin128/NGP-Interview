@@ -184,6 +184,7 @@ void SwapInventorySlots(int from, int to)
                 EquipItem(GameManager.Player.PlayerSettings.starterChestplate);
             if (GameManager.Player.PlayerSettings.starterBoots!= null)
                 EquipItem(GameManager.Player.PlayerSettings.starterBoots);
+            player.Initialize();
             InventoryUI.Instance.Refresh();
         }
         public void EquipItem(string equipmentId, int slotId = -1) => EquipItem(database.Get(equipmentId) as EquipmentObject, slotId);

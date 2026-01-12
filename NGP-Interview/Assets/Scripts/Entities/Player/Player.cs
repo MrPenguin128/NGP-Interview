@@ -49,6 +49,10 @@ namespace Entities.Player
             HandleAttackCooldown();
         }
         #region Stats
+        public void Initialize()
+        {
+            CurrentHealth = MaxHealth;
+        }
         protected override void InitializeStats()
         {
             stats.Initialize(new Dictionary<StatType, float>
@@ -122,7 +126,10 @@ namespace Entities.Player
             if (currentAttackCooldown > 0)
                 currentAttackCooldown -= Time.deltaTime;
             else if (!canAttack)
+            {
                 canAttack = true;
+                IsAttacking = false;
+            }
         }
         void HandleComboReset()
         {

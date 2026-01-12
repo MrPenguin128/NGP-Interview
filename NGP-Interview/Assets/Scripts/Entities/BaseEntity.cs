@@ -10,18 +10,29 @@ namespace Entities
     {
         [Header("Stats")]
         [SerializeField] protected Stats stats = new Stats();
-        [SerializeField] protected float currentHealth;
+        [SerializeField] private float currentHealth;
         [SerializeField] protected float baseMaxHealth;
 
         public float MaxHealth => GetStatValue(StatType.MaxHealth);
 
+        public float CurrentHealth 
+        { 
+            get => currentHealth;
+            protected set
+            {
+                currentHealth = value;
+                OnChangeCurrentHealth?.Invoke(currentHealth);
+            }
+        }
+
         public event Action OnDeath;
         public event Action<float> OnDamageTaken;
+        public event Action<float> OnChangeCurrentHealth;
 
         protected virtual void Awake()
         {
             InitializeStats();
-            currentHealth = MaxHealth;
+            CurrentHealth = MaxHealth;
         }
         protected virtual void Start()
         {
@@ -46,11 +57,11 @@ namespace Entities
         #region Health
         public virtual void TakeDamage(float amount)
         {
-            currentHealth -= amount;
-            Debug.Log($"Ouch! current health: {currentHealth}");
+            CurrentHealth -= amount;
+            Debug.Log($"Ouch! current health: {CurrentHealth}");
             OnDamageTaken?.Invoke(amount);
 
-            if (currentHealth <= 0f)
+            if (CurrentHealth <= 0f)
                 Die();
         }
 
@@ -61,6 +72,7 @@ namespace Entities
         #endregion
 
         #region Stats
+        public StatValue GetStat(StatType type) => stats.GetStat(type);
         public float GetStatValue(StatType type) => stats.GetValue(type);
         public void AddStatModifier(StatModifier modifier)
         {

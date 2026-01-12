@@ -50,7 +50,7 @@ namespace Entities.Enemies
             this.data = data;
             stats.Initialize(baseStats);
             OnChangeMoveSpeed(MoveSpeed);
-            currentHealth = MaxHealth;
+            CurrentHealth = MaxHealth;
         }
         protected override void Die()
         {

@@ -1,3 +1,4 @@
+using UI;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -21,6 +22,8 @@ namespace Entities.Player
         float dashTimer;
         float dashCooldownTimer;
         Vector3 dashDirection;
+        //Attack
+        bool canAttack;
         #endregion
         #region Properties
         #endregion
@@ -28,6 +31,10 @@ namespace Entities.Player
         private void Start()
         {
             player = GameManager.Player;
+        }
+        private void Update()
+        {
+            canAttack = !UIUtils.IsPointerOverUI();
         }
         private void FixedUpdate()
         {
@@ -145,7 +152,7 @@ namespace Entities.Player
         #region Attack
         public void OnAttack(InputAction.CallbackContext context)
         {
-            if (!context.started)
+            if (!context.started || !canAttack)
                 return;
             player.Attack();
         }

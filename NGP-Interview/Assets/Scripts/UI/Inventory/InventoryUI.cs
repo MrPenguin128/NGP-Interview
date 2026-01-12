@@ -6,6 +6,7 @@ namespace InventorySystem.UI
 {
     public class InventoryUI : Singleton<InventoryUI>
     {
+        [SerializeField] GameObject panel;
         [SerializeField] Inventory inventory;
         [SerializeField] InventorySlotUI slotPrefab;
         [SerializeField] Transform slotsParent;
@@ -18,6 +19,7 @@ namespace InventorySystem.UI
 
         public Inventory Inventory => inventory;
         public GameObject DragIcon => dragIcon;
+        public bool IsActive => panel.activeSelf;
         private void Start()
         {
             BuildUI();
@@ -68,5 +70,15 @@ namespace InventorySystem.UI
             };
         }
 
+        #region HUD Methods
+        public void Show()
+        {
+            panel.SetActive(true);
+        }
+        public void Hide()
+        {
+            panel.SetActive(false);
+        }
+        #endregion
     }
 }
