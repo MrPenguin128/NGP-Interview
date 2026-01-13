@@ -3,24 +3,31 @@ using System.Collections.Generic;
 using UnityEngine;
 using SaveAndLoad;
 using InventorySystem;
+using UI;
+using WaveSystem;
 
 public class SaveManager : MonoBehaviourSingletonPersistent<SaveManager>
 {
-    public InventoryData inventoryData;
-
     public void NewGame()
     {
-        inventoryData = null;
+        SceneLoader.Instance.LoadLevel(SceneLoader.GAMEPLAY_SCENE);
     }
     public void Save()
     {
-        SaveSystem.Save(GameManager.Player.Inventory.Data);
+        SaveSystem.Save(GameManager.Player.Inventory.Data, WaveManager.Instance.GetData());
+        HUDManager.Instance?.OnSave();
     }
-    public bool Load()
+    public void Load() => LoadAndConfirm();
+    public bool LoadAndConfirm()
     {
         if (SaveSystem.FileExists)
         {
-            GameManager.Player.Inventory.LoadData(SaveSystem.Load<InventoryData>());
+            var carrier = DataCarrier.CreateDataCarrier(SaveSystem.Load());
+            carrier.HoldDataWithArg((scene, loadMode) =>
+            {
+                GameManager.Instance.LoadData(carrier.arg as List<object>);
+            });
+            SceneLoader.Instance.LoadLevel(SceneLoader.GAMEPLAY_SCENE);
             return true;
         }
         return false;

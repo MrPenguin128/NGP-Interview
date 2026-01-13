@@ -7,6 +7,10 @@ namespace Entities.Player
 {
     public class InteractionHandler : Singleton<InteractionHandler>
     {
+        //------------------------------------
+        //          PREMADE ASSET
+        //------------------------------------
+
         [SerializeField] float checkRadius;
         [SerializeField] LayerMask interactionLayer;
         Collider[] objects = new Collider[10];

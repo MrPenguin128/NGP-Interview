@@ -18,7 +18,7 @@ MonoBehaviour:
   BaseAttackRange: 4
   BaseArmor: 0
   BaseCritChance: 0.05
-  BaseCritDamage: 1.5
+  BaseCritDamage: 1
   starterWeapon: {fileID: 11400000, guid: d1b98f5b401a37e4e8cab4af8e28d639, type: 2}
   starterChestplate: {fileID: 0}
   starterBoots: {fileID: 0}

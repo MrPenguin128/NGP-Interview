@@ -15,12 +15,15 @@ namespace UI
         [Header("References")]
         [SerializeField] InventoryUI inventoryUI;
         [SerializeField] Transform statsHolder;
+        [Header("HUD Components")]
+        [SerializeField] TextMeshProUGUI waveText;
+        [SerializeField] GameObject savingText;
+        [SerializeField] GameObject endingHUD;
         [Header("Player")]
         [Header("   Player Health Bar")]
         [SerializeField] Slider playerHealthBarSlider;
         [Header("   Player Stats")]
         [SerializeField] TextMeshProUGUI playerStatItem;
-        Dictionary<StatType, TextMeshProUGUI> statItems = new Dictionary<StatType, TextMeshProUGUI>();
         Player player;
         private void Start()
         {
@@ -62,6 +65,11 @@ namespace UI
         }
         #endregion
 
+        public void GameEnding()
+        {
+            endingHUD.SetActive(true);
+        }
+
         public void ToggleInventory(InputAction.CallbackContext context)
         {
             if (!context.started)
@@ -71,6 +79,17 @@ namespace UI
             else
                 inventoryUI.Show();
         }
+        public void UpdateCurrentWave(int wave)
+        {
+            waveText.text = $"Current Wave: {wave:00}";
+        }
+
+        public void OnSave()
+        {
+            savingText.SetActive(true);
+            Invoke(nameof(DisableSavingText), 3f);
+        }
+        void DisableSavingText() => savingText.SetActive(false);
     }
 
     public static class UIUtils

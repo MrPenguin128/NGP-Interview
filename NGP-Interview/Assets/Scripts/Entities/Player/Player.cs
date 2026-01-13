@@ -41,7 +41,6 @@ namespace Entities.Player
         protected override void Awake()
         {
             base.Awake();
-            GameManager.RegisterPlayer(this);
             inventory = GetComponent<Inventory>();
             movement = GetComponent<PlayerMovement>();
         }

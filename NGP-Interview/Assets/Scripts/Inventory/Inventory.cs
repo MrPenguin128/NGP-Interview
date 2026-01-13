@@ -14,20 +14,22 @@ namespace InventorySystem
         public InventoryData Data { get; private set; }
         ItemDatabase database;
         Player player;
-
+        bool setStarterItems = true;
         public Action OnContentChanged;
         private void Awake()
         {
+            player = GetComponent<Player>();
             database = ItemDatabase.Instance;
             Data = new InventoryData(slotCount);
         }
         private void Start()
         {
-            player = GameManager.Player;
-            InitializeEquipment();
+            if (setStarterItems)
+                InitializeEquipment();
         }
         public void LoadData(InventoryData newData)
         {
+            setStarterItems = false;
             //Loads the equipment data before loading, so no item is duplicated
             if (newData.equippedWeapon != null)
                 EquipItem(newData.equippedWeapon.ItemId);
@@ -144,10 +146,6 @@ void SwapInventorySlots(int from, int to)
 
             if (source.IsEmpty) return;
 
-            Debug.Log($"Swapping {from} to {to}");
-
-
-
             //Stack
             if (!target.IsEmpty && source.ItemId == target.ItemId)
             {
@@ -217,6 +215,7 @@ void SwapInventorySlots(int from, int to)
                     break;
             }
             equipment.OnEquip(player);
+            Debug.Log($"Equip {equipment.Id}");
         }
         public void UnequipItem(string equipmentId) => UnequipItem(database.Get(equipmentId) as EquipmentObject);
         public void UnequipItem(EquipmentObject equipment)

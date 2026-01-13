@@ -68,7 +68,7 @@ public static class ItemDescriptionParser
         // Multiplicadores
         if (stat == StatType.CritDamage)
         {
-            return $"{value:0.#}x";
+            return $"{value.ToString("0.#").Replace(',','.')}x";
         }
 
         // Valores numéricos normais

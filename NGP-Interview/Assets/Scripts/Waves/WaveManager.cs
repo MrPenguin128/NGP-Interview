@@ -2,6 +2,7 @@ using Entities.Enemies;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UI;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -16,14 +17,22 @@ namespace WaveSystem
         int currentWave;
         int aliveEnemies;
         List<EnemyPoolItem> enemyPool = new List<EnemyPoolItem>();
-        public int CurrentWave => currentWave;
+        public int CurrentWave
+        {
+            get => currentWave;
+            private set
+            {
+                currentWave = value;
+                HUDManager.Instance.UpdateCurrentWave(value);
+            }
+        }
         public int WaveLenght => waves.Length;
 
         public Action<int> OnWaveCompleted;
         public IEnumerator SpawnNextWave()
         {
-            if (currentWave >= waves.Length) yield break;
-            foreach (var wave in waves[currentWave].enemyWaves)
+            if (CurrentWave >= waves.Length) yield break;
+            foreach (var wave in waves[CurrentWave].enemyWaves)
             {
                 for (int i = 0; i < wave.enemyAmount; i++)
                 {
@@ -32,7 +41,7 @@ namespace WaveSystem
                     yield return new WaitForSeconds(spawnInterval);
                 }
             }
-            currentWave++;
+            CurrentWave++;
         }
 
         void SpawnEnemy(EnemyDataObject enemyObject)
@@ -66,9 +75,16 @@ namespace WaveSystem
         }
         void WaveCompleted()
         {
-            OnWaveCompleted?.Invoke(currentWave);
+            OnWaveCompleted?.Invoke(CurrentWave);
         }
-
+        public WaveSpawnerData GetData()
+        {
+            return new WaveSpawnerData(CurrentWave);
+        }
+        public void LoadData(WaveSpawnerData data)
+        {
+            CurrentWave = data.currentWave;
+        }
         class EnemyPoolItem
         {
             public EnemyDataObject Data;
@@ -80,8 +96,15 @@ namespace WaveSystem
                 Data = data;
                 EnemyInstance = enemyInstance;
             }
+        }
+    }
+    public class WaveSpawnerData
+    {
+        public int currentWave;
 
-
+        public WaveSpawnerData(int currentWave)
+        {
+            this.currentWave = currentWave;
         }
     }
 }

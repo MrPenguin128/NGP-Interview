@@ -1,16 +1,20 @@
 using Entities.Player;
 using System.Collections;
+using System.Collections.Generic;
 using System.ComponentModel.Design;
 using WaveSystem;
 using UnityEngine;
+using NUnit.Framework;
+using InventorySystem;
+using UI;
 
 public class GameManager : Singleton<GameManager>
 {
-    public static Player Player { get; private set; }
+    public static Player Player => Instance.player;
     [Header("Waves Settings")]
     [SerializeField] int maxEnemiesSpawned;
     [SerializeField] float timeBetweenWaves;
-    Player p;
+    [SerializeField] Player player;
     public int MaxEnemiesSpawned => maxEnemiesSpawned;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -20,15 +24,13 @@ public class GameManager : Singleton<GameManager>
         StartCoroutine(StartWave());
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     void CheckNextWave(int currentWave)
     {
         if (currentWave < WaveManager.Instance.WaveLenght)
+        {
+            SaveManager.Instance.Save();
             StartCoroutine(StartWave());
+        }
         else
             GameEnding();
     }
@@ -39,26 +41,26 @@ public class GameManager : Singleton<GameManager>
     }
     void GameEnding()
     {
-        Debug.Log("You Win!");
+        HUDManager.Instance.GameEnding();
     }
-    //Static reference to the Player entity to maintain easy and simple access.
-    #region Player Reference
-    public static void RegisterPlayer(Player player)
+
+    public void LoadData(List<object> loadData)
     {
-        if (Player != null && Player != player)
+        foreach (var item in loadData)
         {
-            Debug.LogWarning($"Trying to register a second player {player.gameObject?.name}.");
-            return;
+            switch (item)
+            {
+                case InventoryData inventoryData:
+                    Player.Inventory.LoadData(inventoryData);
+                    break;
+                case WaveSpawnerData waveSpawnerData:
+                    WaveManager.Instance.LoadData(waveSpawnerData);
+                    break;
+                default:
+                    break;
+            }
         }
-        Player = player;
-        Instance.p = Player;
     }
-    public static void Unregister(Player player)
-    {
-        if (Player == player)
-            Player = null;
-    }
-    #endregion
 
     public enum GameState
     {
