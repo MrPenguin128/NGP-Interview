@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Monster Eye
   m_EditorClassIdentifier: Assembly-CSharp::Inventory.ItemObject
   Id: monster_eye
-  DisplayName: Monster Eye
   Icon: {fileID: -1284217604, guid: 6300602bbf76ae743980b474105c04c3, type: 3}
+  DisplayName: Monster Eye
+  Description: 
   Stackable: 1
   MaxStack: 99

@@ -15,7 +15,9 @@ MonoBehaviour:
   Id: chainmail_boots
   Icon: {fileID: 1795447934, guid: 6300602bbf76ae743980b474105c04c3, type: 3}
   DisplayName: Chainmail Boots
-  Description: 'Armor: +{[ARM]}
+  Description: 'A light boots pair.
+
+    Armor: +{[ARM]}
 
     Move Speed: +{[MSP]}'
   Stackable: 0
@@ -23,7 +25,7 @@ MonoBehaviour:
   type: 2
   modifiers:
   - stat: 5
-    value: 5
+    value: 1
     type: 0
     Duration: 0
   - stat: 2

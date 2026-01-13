@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ada4c81d0bff61441bdcb8bba1f22a44, type: 3}
+  m_Name: SturdyEnemy
+  m_EditorClassIdentifier: Assembly-CSharp::BaseEnemyObject
+  baseMaxHealth: 120
+  baseDamage: 18
+  baseMoveSpeed: 3
+  baseAttackSpeed: 0.5
+  baseAttackRange: 3
+  baseArmor: 4
+  baseCritChance: 0.3
+  baseCritDamage: 1.5
+  enemyPrefab: {fileID: 6086354314025913924, guid: 2ee538927e7f8444e8d88976050bf4d7, type: 3}

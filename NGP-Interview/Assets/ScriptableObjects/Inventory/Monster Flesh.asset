@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Monster Flesh
   m_EditorClassIdentifier: Assembly-CSharp::Inventory.ItemObject
   Id: monster_flesh
-  DisplayName: Monster Flesh
   Icon: {fileID: -1582834004, guid: 6300602bbf76ae743980b474105c04c3, type: 3}
+  DisplayName: Monster Flesh
+  Description: 
   Stackable: 1
   MaxStack: 99

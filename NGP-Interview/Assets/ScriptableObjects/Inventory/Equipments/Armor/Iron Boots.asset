@@ -10,12 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c36e7b017e352454d8ad4ea76ad11dc9, type: 3}
-  m_Name: Diamond Boots
+  m_Name: Iron Boots
   m_EditorClassIdentifier: Assembly-CSharp::InventorySystem.BootsObject
-  Id: diamond_boots
-  Icon: {fileID: 1426281857, guid: 6300602bbf76ae743980b474105c04c3, type: 3}
-  DisplayName: Diamond Boots
-  Description: 'Armor: +{[ARM]}
+  Id: iron_boots
+  Icon: {fileID: -1944775168, guid: 6300602bbf76ae743980b474105c04c3, type: 3}
+  DisplayName: Iron Boots
+  Description: 'A great boots pair.
+
+    Armor: +{[ARM]}
 
     Move Speed: +{[MSP]}'
   Stackable: 0
@@ -23,10 +25,10 @@ MonoBehaviour:
   type: 2
   modifiers:
   - stat: 5
-    value: 15
+    value: 2
     type: 0
     Duration: 0
   - stat: 2
-    value: 0.5
+    value: 0.15
     type: 1
     Duration: 0

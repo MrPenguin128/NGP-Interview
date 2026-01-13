@@ -10,12 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 731e78fc9c10604468cb277d44ca0eca, type: 3}
-  m_Name: Chainmail Chestplate
+  m_Name: Iron Chestplate
   m_EditorClassIdentifier: Assembly-CSharp::InventorySystem.ChestplateObject
-  Id: chainmail_chestplate
-  Icon: {fileID: -494993181, guid: 6300602bbf76ae743980b474105c04c3, type: 3}
-  DisplayName: Chainmail Chestplate
-  Description: 'Max Health: +{[HPM]}
+  Id: iron_chestplate
+  Icon: {fileID: -341063523, guid: 6300602bbf76ae743980b474105c04c3, type: 3}
+  DisplayName: Iron Chestplate
+  Description: 'A sturdy chestplate
+
+    Max Health: +{[HPM]}
 
     Armor: +{[ARM]}'
   Stackable: 0
@@ -23,10 +25,10 @@ MonoBehaviour:
   type: 1
   modifiers:
   - stat: 0
-    value: 20
+    value: 50
     type: 0
     Duration: 0
   - stat: 5
-    value: 10
+    value: 4
     type: 0
     Duration: 0

@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adc5f8348d3ddeb489e482573a6db723, type: 3}
   m_Name: Default Player Settings
   m_EditorClassIdentifier: Assembly-CSharp::PlayerSettingsObject
-  BaseDamage: 10
-  BaseMoveSpeed: 10
+  BaseDamage: 0
+  BaseMoveSpeed: 5
   BaseAttackSpeed: 1
-  BaseAttackRange: 3
+  BaseAttackRange: 4
   BaseArmor: 0
-  BaseCritChance: 0
-  BaseCritDamage: 0
+  BaseCritChance: 0.05
+  BaseCritDamage: 1.5
   starterWeapon: {fileID: 11400000, guid: d1b98f5b401a37e4e8cab4af8e28d639, type: 2}
-  starterChestplate: {fileID: 11400000, guid: 3823e23abe2e08a4bab68f6679500d1b, type: 2}
-  starterBoots: {fileID: 11400000, guid: ce37cebca4563a54fa33873c2365f056, type: 2}
+  starterChestplate: {fileID: 0}
+  starterBoots: {fileID: 0}

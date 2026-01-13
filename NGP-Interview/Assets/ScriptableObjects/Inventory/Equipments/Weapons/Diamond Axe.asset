@@ -10,24 +10,39 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 455e6e9d604516f4285569c79b52cc61, type: 3}
-  m_Name: Diamond Sword
+  m_Name: Diamond Axe
   m_EditorClassIdentifier: Assembly-CSharp::InventorySystem.WeaponObject
-  Id: diamond_sword
-  Icon: {fileID: 1627856900, guid: 6300602bbf76ae743980b474105c04c3, type: 3}
-  DisplayName: Diamond Sword
-  Description: 'Damage: +{[DMG]}
+  Id: diamond_axe
+  Icon: {fileID: -1945479096, guid: 6300602bbf76ae743980b474105c04c3, type: 3}
+  DisplayName: Diamond Axe
+  Description: 'A shiny, light and quick weapon.
 
-    Attack Speed: +{[ASP]}'
+    Damage: +{[DMG]}
+
+    Attack
+    Speed: +{[ASP]}
+
+    Critical Chance: +{[CRC]}
+
+    Critical Damage: {[CRD]}'
   Stackable: 0
   MaxStack: 1
   type: 0
   modifiers:
   - stat: 1
-    value: 40
+    value: 14
     type: 0
     Duration: 0
   - stat: 3
-    value: 0.25
-    type: 1
+    value: 1.4
+    type: 2
     Duration: 0
-  comboData: {fileID: 11400000, guid: a31fd2203b2712f408981c8a71f9208e, type: 2}
+  - stat: 6
+    value: 0.3
+    type: 0
+    Duration: 0
+  - stat: 7
+    value: 1.8
+    type: 2
+    Duration: 0
+  comboData: {fileID: 11400000, guid: 84dd858dbf815944ba9ebd1e5c5bf8c6, type: 2}

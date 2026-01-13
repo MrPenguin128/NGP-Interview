@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 455e6e9d604516f4285569c79b52cc61, type: 3}
+  m_Name: Wooden Sword
+  m_EditorClassIdentifier: Assembly-CSharp::InventorySystem.WeaponObject
+  Id: wooden_sword
+  Icon: {fileID: -1668237034, guid: 6300602bbf76ae743980b474105c04c3, type: 3}
+  DisplayName: Wooden Sword
+  Description: 'A slow but powerful weapon.
+
+    Damage: +{[DMG]}
+
+    Attack Speed:
+    +{[ASP]}
+
+    Critical Chance: +{[CRC]}
+
+    Critical Damage: {[CRD]}'
+  Stackable: 0
+  MaxStack: 1
+  type: 0
+  modifiers:
+  - stat: 1
+    value: 14
+    type: 0
+    Duration: 0
+  - stat: 3
+    value: 0.9
+    type: 2
+    Duration: 0
+  - stat: 6
+    value: 0.1
+    type: 0
+    Duration: 0
+  - stat: 7
+    value: 2.2
+    type: 2
+    Duration: 0
+  comboData: {fileID: 11400000, guid: a31fd2203b2712f408981c8a71f9208e, type: 2}

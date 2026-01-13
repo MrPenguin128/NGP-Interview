@@ -10,22 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8d3c7549b068329458dcb29877c272ea, type: 3}
-  m_Name: Great Sword Combo
+  m_Name: Sword Combo
   m_EditorClassIdentifier: Assembly-CSharp::ComboDataObject
   hits:
-  - AttackAngle: 60
+  - AttackAngle: 100
     AttackRangeMultiplier: 1
     DamageMultiplier: 1
-    MoveSpeedModifier: -0.1
-    HitDelay: 0.1
-  - AttackAngle: 90
-    AttackRangeMultiplier: 1.1
+    MoveSpeedModifier: -0.25
+    HitDelay: 0.35
+  - AttackAngle: 120
+    AttackRangeMultiplier: 1.05
     DamageMultiplier: 1.2
-    MoveSpeedModifier: -0.4
-    HitDelay: 0.1
-  - AttackAngle: 180
-    AttackRangeMultiplier: 1.25
-    DamageMultiplier: 1.5
-    MoveSpeedModifier: -0.9
-    HitDelay: 0.25
-  ComboResetTime: 1
+    MoveSpeedModifier: -0.35
+    HitDelay: 0.4
+  - AttackAngle: 80
+    AttackRangeMultiplier: 1.2
+    DamageMultiplier: 1.6
+    MoveSpeedModifier: -0.6
+    HitDelay: 0.55
+  ComboResetTime: 0.8
