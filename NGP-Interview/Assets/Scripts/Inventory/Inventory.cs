@@ -215,7 +215,6 @@ void SwapInventorySlots(int from, int to)
                     break;
             }
             equipment.OnEquip(player);
-            Debug.Log($"Equip {equipment.Id}");
         }
         public void UnequipItem(string equipmentId) => UnequipItem(database.Get(equipmentId) as EquipmentObject);
         public void UnequipItem(EquipmentObject equipment)
