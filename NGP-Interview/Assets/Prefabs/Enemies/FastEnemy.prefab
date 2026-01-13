@@ -132,7 +132,7 @@ MonoBehaviour:
   - item: {fileID: 11400000, guid: 0617bd2f7417fe74c873b79887c5bfc7, type: 2}
     weight: 1
   dropRepetitions: 2
-  dropChance: 20
+  dropChance: 40
   minDropAmount: 1
   maxDropAmount: 3
 --- !u!195 &2703812782567621403
