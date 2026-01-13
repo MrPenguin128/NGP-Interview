@@ -54,7 +54,7 @@ public static class ItemDescriptionParser
         return total;
     }
 
-    private static string FormatValue(
+    public static string FormatValue(
         StatType stat,
         float value)
     {

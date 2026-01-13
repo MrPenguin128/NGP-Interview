@@ -55,12 +55,12 @@ namespace Entities
         }
 
         #region Health
-        public virtual void TakeDamage(float amount)
+        public virtual void TakeDamage(float amount, bool isCritical)
         {
             CurrentHealth -= amount;
-            Debug.Log($"Ouch! current health: {CurrentHealth}");
+            Debug.Log($"Ouch! current health: {CurrentHealth} {isCritical}");
             OnDamageTaken?.Invoke(amount);
-
+            DamagePopup.Create(transform.position, amount, isCritical);
             if (CurrentHealth <= 0f)
                 Die();
         }
@@ -74,6 +74,7 @@ namespace Entities
         #region Stats
         public StatValue GetStat(StatType type) => stats.GetStat(type);
         public float GetStatValue(StatType type) => stats.GetValue(type);
+        public List<Stats.StatPair> GetAllStats() => stats.AllStats;
         public void AddStatModifier(StatModifier modifier)
         {
             stats.AddModifier(modifier);

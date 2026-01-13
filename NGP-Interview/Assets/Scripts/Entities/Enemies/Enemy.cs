@@ -83,10 +83,10 @@ namespace Entities.Enemies
 
             nextAttackTime = Time.time + 1 / AttackSpeed;
 
-            if (Random.Range(0, 100) < CritChance)
-                GameManager.Player.TakeDamage(Damage * CritDamage);
+            if (Random.Range(0, 100) < CritChance * 100)
+                GameManager.Player.TakeDamage(Damage * CritDamage, true);
             else
-                GameManager.Player.TakeDamage(Damage);
+                GameManager.Player.TakeDamage(Damage, false);
         }
         protected virtual void FindTarget()
         {

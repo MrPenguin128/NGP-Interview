@@ -69,7 +69,6 @@ namespace Entities.Player
         {
             if (player.IsAttacking)
             {
-                RotateTowardsMouse();
                 return;
             }
             if (moveInput.sqrMagnitude < 0.01f)
@@ -85,27 +84,28 @@ namespace Entities.Player
             ));
         }
         //Rotates the player towards the mouse position, which will be the attack direction
-        private void RotateTowardsMouse()
+        public Vector3 RotateTowardsMouse()
         {
             Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
             Plane groundPlane = new Plane(Vector3.up, transform.position);
 
             if (!groundPlane.Raycast(ray, out float distance))
-                return;
+                return Vector3.zero;
 
             Vector3 targetPoint = ray.GetPoint(distance);
             Vector3 dir = targetPoint - transform.position;
             dir.y = 0f;
 
             if (dir.sqrMagnitude < 0.01f)
-                return;
+                return dir;
 
             Quaternion targetRot = Quaternion.LookRotation(dir.normalized);
             rb.MoveRotation(Quaternion.Slerp(
                 rb.rotation,
                 targetRot,
-                rotationSpeed * Time.fixedDeltaTime
+                10
             ));
+            return dir;
         }
         #endregion
         #region Dash

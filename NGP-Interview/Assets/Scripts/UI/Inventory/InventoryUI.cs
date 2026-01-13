@@ -78,6 +78,7 @@ namespace InventorySystem.UI
         public void Hide()
         {
             panel.SetActive(false);
+            ItemTooltipUI.Instance.Hide();
         }
         #endregion
     }

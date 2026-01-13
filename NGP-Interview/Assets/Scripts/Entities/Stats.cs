@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace Entities.StatsSystem
 {
@@ -11,6 +12,8 @@ namespace Entities.StatsSystem
     public class Stats
     {
         public List<StatPair> statsList = new List<StatPair>();
+
+        public List<StatPair> AllStats => statsList;
 
         public void Initialize(Dictionary<StatType, float> baseStats)
         {

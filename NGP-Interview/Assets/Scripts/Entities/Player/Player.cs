@@ -11,6 +11,7 @@ namespace Entities.Player
     {
         Inventory inventory;
         [SerializeField] PlayerSettingsObject playerSettings;
+        [SerializeField] PlayerMovement movement;
         [Header("Attack Settings")] 
         [SerializeField] LayerMask damageableMask;
         [SerializeField] ComboDataObject comboData;
@@ -20,6 +21,7 @@ namespace Entities.Player
         float currentComboTime;
         [Header("Debug")]
         [SerializeField] bool drawGizmos = true;
+        [SerializeField] bool drawAttackMesh = true;
         [SerializeField] int comboIndexDebug;
 
         #region Properties
@@ -41,6 +43,7 @@ namespace Entities.Player
             base.Awake();
             GameManager.RegisterPlayer(this);
             inventory = GetComponent<Inventory>();
+            movement = GetComponent<PlayerMovement>();
         }
         protected override void Update()
         {
@@ -67,10 +70,10 @@ namespace Entities.Player
                 { StatType.CritDamage, PlayerSettings.BaseCritDamage },
             });
         }
-        public override void TakeDamage(float amount)
+        public override void TakeDamage(float amount, bool isCritical)
         {
             amount -= Armor;
-            base.TakeDamage(Mathf.Max(amount, 0));
+            base.TakeDamage(Mathf.Max(amount, 1), isCritical);
         }
         #endregion
         #region Attack
@@ -83,7 +86,7 @@ namespace Entities.Player
             canAttack = false;
             IsAttacking = true;
             Vector3 origin = transform.position;
-            Vector3 forward = transform.forward;
+            Vector3 forward = movement.RotateTowardsMouse();
 
             ComboHit currentHit = comboData.hits[currentComboIndex];
             var range = AttackRange * currentHit.AttackRangeMultiplier;
@@ -91,6 +94,7 @@ namespace Entities.Player
             var damage = Damage * currentHit.DamageMultiplier;
             var slow = currentHit.MoveSpeedModifier;
             var slowDuration = currentHit.HitDelay;
+
             Collider[] hits = Physics.OverlapSphere(origin, range, damageableMask);
             foreach (var hit in hits)
             {
@@ -99,10 +103,10 @@ namespace Entities.Player
 
                 if (hit.TryGetComponent<BaseEntity>(out var damageable))
                 {
-                    if (Random.Range(0, 100) < CritChance)
-                        damageable.TakeDamage(damage * CritDamage);
+                    if (Random.Range(0, 100) < CritChance * 100)
+                        damageable.TakeDamage(damage * CritDamage, true);
                     else
-                        damageable.TakeDamage(damage);
+                        damageable.TakeDamage(damage, false);
                     damageable.AddStatModifier(new StatModifier(
                         StatType.MoveSpeed,
                         slow,
@@ -111,12 +115,22 @@ namespace Entities.Player
                         ));
                 }
             }
+
+            if (drawAttackMesh)
+            {
+                AttackDebugMesh.Instance.DrawArc(range, angle);
+            }
+
             //Cicles through the hits
             currentComboIndex = (currentComboIndex + 1) % comboData.hits.Length;
-            currentAttackCooldown = 1f / AttackSpeed + currentHit.HitDelay;
-            currentComboTime = comboData.ComboResetTime;
+            currentAttackCooldown = currentHit.HitDelay / AttackSpeed;
+            currentComboTime = comboData.ComboResetTime + currentAttackCooldown;
+            Invoke(nameof(ResetIsAttacking), currentAttackCooldown);
         }
-
+        void ResetIsAttacking()
+        {
+            IsAttacking = false;
+        }
         public void SetComboData(ComboDataObject comboData)
         {
             this.comboData = comboData;
@@ -128,7 +142,6 @@ namespace Entities.Player
             else if (!canAttack)
             {
                 canAttack = true;
-                IsAttacking = false;
             }
         }
         void HandleComboReset()
