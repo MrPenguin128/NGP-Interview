@@ -46,4 +46,6 @@ MonoBehaviour:
     value: 1.7
     type: 2
     Duration: 0
+  weaponType: 1
   comboData: {fileID: 11400000, guid: 84dd858dbf815944ba9ebd1e5c5bf8c6, type: 2}
+  WeaponType: 0

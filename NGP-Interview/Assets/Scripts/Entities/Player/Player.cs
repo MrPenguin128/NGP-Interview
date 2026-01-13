@@ -19,6 +19,10 @@ namespace Entities.Player
         int currentComboIndex;
         float currentAttackCooldown;
         float currentComboTime;
+        [Header("Animation")]
+        [SerializeField] GameObject swordAnimItem;
+        [SerializeField] GameObject axeAnimItem;
+        int currentLayerIndex;
         [Header("Debug")]
         [SerializeField] bool drawGizmos = true;
         [SerializeField] bool drawAttackMesh = true;
@@ -43,6 +47,8 @@ namespace Entities.Player
             base.Awake();
             inventory = GetComponent<Inventory>();
             movement = GetComponent<PlayerMovement>();
+            inventory.OnEquipItem += OnEquipItem;
+            inventory.OnUnequipItem += OnUnequipItem;
         }
         protected override void Update()
         {
@@ -92,7 +98,7 @@ namespace Entities.Player
             var angle = currentHit.AttackAngle;
             var damage = Damage * currentHit.DamageMultiplier;
             var slow = currentHit.MoveSpeedModifier;
-            var slowDuration = currentHit.HitDelay;
+            var attackDuration = currentHit.HitDelay / AttackSpeed;
 
             Collider[] hits = Physics.OverlapSphere(origin, range, damageableMask);
             foreach (var hit in hits)
@@ -110,11 +116,12 @@ namespace Entities.Player
                         StatType.MoveSpeed,
                         slow,
                         StatModifier.StatModifierType.PercentAdd,
-                        slowDuration
+                        attackDuration
                         ));
                 }
             }
-
+            anim.SetFloat("Speed", anim.GetCurrentAnimatorClipInfo(currentLayerIndex).Length / attackDuration);
+            anim.SetTrigger($"Hit {currentComboIndex}");
             if (drawAttackMesh)
             {
                 AttackDebugMesh.Instance.DrawArc(range, angle);
@@ -122,7 +129,7 @@ namespace Entities.Player
 
             //Cicles through the hits
             currentComboIndex = (currentComboIndex + 1) % comboData.hits.Length;
-            currentAttackCooldown = currentHit.HitDelay / AttackSpeed;
+            currentAttackCooldown = attackDuration;
             currentComboTime = comboData.ComboResetTime + currentAttackCooldown;
             Invoke(nameof(ResetIsAttacking), currentAttackCooldown);
         }
@@ -162,7 +169,66 @@ namespace Entities.Player
             return angleToTarget <= attackAngle;
         }
         #endregion
-
+        #region Animation
+        public void OnMoving(float moveMagnitude)
+        {
+            anim.SetBool("Run", moveMagnitude > 0.1f);
+        }
+        void OnEquipItem(EquipmentObject equipment)
+        {
+            switch (equipment.Type)
+            {
+                case EquipmentType.Weapon:
+                    anim.SetLayerWeight(anim.GetLayerIndex($"Unarmed Layer"), 0);
+                    switch ((equipment as WeaponObject).WeaponType)
+                    {
+                        case WeaponObject.WeaponTypes.Sword:
+                            currentLayerIndex = anim.GetLayerIndex($"Sword Layer");
+                            anim.SetLayerWeight(currentLayerIndex, 1);
+                            anim.SetLayerWeight(anim.GetLayerIndex($"Axe Layer"), 0);
+                            swordAnimItem.SetActive(true);
+                            axeAnimItem.SetActive(false);
+                            break;
+                        case WeaponObject.WeaponTypes.Axe:
+                            currentLayerIndex = anim.GetLayerIndex($"Axe Layer");
+                            anim.SetLayerWeight(anim.GetLayerIndex($"Sword Layer"), 0);
+                            anim.SetLayerWeight(anim.GetLayerIndex($"Axe Layer"), 1);
+                            swordAnimItem.SetActive(false);
+                            axeAnimItem.SetActive(true);
+                            break;
+                        default:
+                            break;
+                    }
+                    break;
+                case EquipmentType.Chestplate:
+                    break;
+                case EquipmentType.Boots:
+                    break;
+                default:
+                    break;
+            }
+        }
+        void OnUnequipItem(EquipmentObject equipment)
+        {
+            switch (equipment.Type)
+            {
+                case EquipmentType.Weapon:
+                    currentLayerIndex = anim.GetLayerIndex($"Unarmed Layer");
+                    anim.SetLayerWeight(currentLayerIndex, 1);
+                    anim.SetLayerWeight(anim.GetLayerIndex($"Sword Layer"), 0);
+                    anim.SetLayerWeight(anim.GetLayerIndex($"Axe Layer"), 0);
+                    swordAnimItem.SetActive(false);
+                    axeAnimItem.SetActive(false);
+                    break;
+                case EquipmentType.Chestplate:
+                    break;
+                case EquipmentType.Boots:
+                    break;
+                default:
+                    break;
+            }
+        }
+        #endregion
         #region Debug
         private void OnDrawGizmosSelected()
         {

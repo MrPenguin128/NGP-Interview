@@ -61,6 +61,8 @@ namespace Entities.Player
             velocity.y = rb.linearVelocity.y;
 
             rb.linearVelocity = velocity;
+
+            player.OnMoving(velocity.magnitude);
         }
         #endregion
         #region Rotation

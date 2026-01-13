@@ -8,9 +8,11 @@ namespace Entities
 {
     public abstract class BaseEntity : MonoBehaviour
     {
+        [Header("Components")]
+        [SerializeField] protected Animator anim;
         [Header("Stats")]
         [SerializeField] protected Stats stats = new Stats();
-        [SerializeField] private float currentHealth;
+        [SerializeField] protected float currentHealth;
         [SerializeField] protected float baseMaxHealth;
         bool dead;
         public float MaxHealth => GetStatValue(StatType.MaxHealth);

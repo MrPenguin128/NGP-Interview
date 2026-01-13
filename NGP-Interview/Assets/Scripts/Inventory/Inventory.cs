@@ -16,6 +16,8 @@ namespace InventorySystem
         Player player;
         bool setStarterItems = true;
         public Action OnContentChanged;
+        public Action<EquipmentObject> OnEquipItem;
+        public Action<EquipmentObject> OnUnequipItem;
         private void Awake()
         {
             player = GetComponent<Player>();
@@ -215,6 +217,7 @@ void SwapInventorySlots(int from, int to)
                     break;
             }
             equipment.OnEquip(player);
+            OnEquipItem?.Invoke(equipment);
         }
         public void UnequipItem(string equipmentId) => UnequipItem(database.Get(equipmentId) as EquipmentObject);
         public void UnequipItem(EquipmentObject equipment)
@@ -237,6 +240,7 @@ void SwapInventorySlots(int from, int to)
                     break;
             }
             AddItem(equipment);
+            OnUnequipItem?.Invoke(equipment);
         }
         #endregion
     }

@@ -74,6 +74,7 @@ namespace Entities.Enemies
             {
                 agent.isStopped = false;
                 agent.SetDestination(target.position);
+                anim.SetBool("Run", agent.acceleration > 0.1f);
             }
         }
 
@@ -91,6 +92,8 @@ namespace Entities.Enemies
                 GameManager.Player.TakeDamage(Damage * CritDamage, true);
             else
                 GameManager.Player.TakeDamage(Damage, false);
+
+            anim.SetTrigger("Attack");
         }
         protected virtual void FindTarget()
         {

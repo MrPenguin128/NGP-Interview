@@ -8,8 +8,8 @@ namespace InventorySystem.UI
     public class InventorySlotUI : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler, IPointerEnterHandler, IPointerExitHandler
     {
         [SerializeField] SlotType type;
-        [SerializeField] private Image icon;
-        [SerializeField] private TextMeshProUGUI quantityText;
+        [SerializeField] Image icon;
+        [SerializeField] TextMeshProUGUI quantityText;
 
         public int SlotIndex { get; private set; }
 

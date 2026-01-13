@@ -7,7 +7,9 @@ namespace InventorySystem
     [CreateAssetMenu(fileName = "WeaponObject", menuName = "Scriptable Objects/Inventory/Items/Weapon")]
     public class WeaponObject : EquipmentObject
     {
+        [SerializeField] WeaponTypes weaponType;
         [SerializeField] ComboDataObject comboData;
+        public WeaponTypes WeaponType => weaponType;
         private void Awake()
         {
             type = EquipmentType.Weapon;
@@ -21,6 +23,12 @@ namespace InventorySystem
         {
             base.OnUnequip(entity);
             (entity as Player).SetComboData(null);
+        }
+
+        public enum WeaponTypes
+        {
+            Sword,
+            Axe
         }
     }
 }
