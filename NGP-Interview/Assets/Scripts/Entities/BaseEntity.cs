@@ -56,7 +56,14 @@ namespace Entities
             });
         }
 
+
         #region Health
+        public virtual void Heal(float amount)
+        {
+            amount = Mathf.Clamp(amount, 0, MaxHealth - CurrentHealth);
+            CurrentHealth += amount;
+            DamagePopup.CreateHealing(transform.position, amount);
+        }
         public virtual void TakeDamage(float amount, bool isCritical)
         {
             CurrentHealth -= amount;

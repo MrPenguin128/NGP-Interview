@@ -21,8 +21,7 @@ namespace InventorySystem
         }
         #endregion
 
-        List<ItemObject> items = new List<ItemObject>();
-
+        [SerializeField] List<ItemObject> items = new List<ItemObject>();
         public ItemObject Get(string id)
         {
             foreach (var item in items)

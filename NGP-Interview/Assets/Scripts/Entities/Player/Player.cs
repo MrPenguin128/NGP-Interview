@@ -12,6 +12,8 @@ namespace Entities.Player
         Inventory inventory;
         [SerializeField] PlayerSettingsObject playerSettings;
         [SerializeField] PlayerMovement movement;
+        float previousMaxHealth;
+
         [Header("Attack Settings")] 
         [SerializeField] LayerMask damageableMask;
         [SerializeField] ComboDataObject comboData;
@@ -49,6 +51,7 @@ namespace Entities.Player
             movement = GetComponent<PlayerMovement>();
             inventory.OnEquipItem += OnEquipItem;
             inventory.OnUnequipItem += OnUnequipItem;
+            previousMaxHealth = MaxHealth;
         }
         protected override void Update()
         {
@@ -74,11 +77,23 @@ namespace Entities.Player
                 { StatType.CritChance, PlayerSettings.BaseCritChance },
                 { StatType.CritDamage, PlayerSettings.BaseCritDamage },
             });
+            stats.GetStat(StatType.MaxHealth).OnValueChanged += UpdateCurrentHealth;
         }
+        private void UpdateCurrentHealth(float obj)
+        {
+            CurrentHealth = (CurrentHealth / previousMaxHealth) * obj;
+            previousMaxHealth = obj;
+        }
+
         public override void TakeDamage(float amount, bool isCritical)
         {
             amount -= Armor;
             base.TakeDamage(Mathf.Max(amount, 1), isCritical);
+        }
+        protected override void Die()
+        {
+            base.Die();
+            GameManager.Instance.GameOver();
         }
         #endregion
         #region Attack

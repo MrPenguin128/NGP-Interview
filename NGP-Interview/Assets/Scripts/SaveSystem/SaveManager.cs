@@ -8,17 +8,12 @@ using WaveSystem;
 
 public class SaveManager : MonoBehaviourSingletonPersistent<SaveManager>
 {
-    public void NewGame()
-    {
-        SceneLoader.Instance.LoadLevel(SceneLoader.GAMEPLAY_SCENE);
-    }
     public void Save()
     {
         SaveSystem.Save(GameManager.Player.Inventory.Data, WaveManager.Instance.GetData());
         HUDManager.Instance?.OnSave();
     }
-    public void Load() => LoadAndConfirm();
-    public bool LoadAndConfirm()
+    public bool Load()
     {
         if (SaveSystem.FileExists)
         {

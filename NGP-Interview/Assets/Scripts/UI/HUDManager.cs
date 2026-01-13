@@ -19,9 +19,11 @@ namespace UI
         [SerializeField] TextMeshProUGUI waveText;
         [SerializeField] GameObject savingText;
         [SerializeField] GameObject endingHUD;
+        [SerializeField] GameObject gameOverHUD;
         [Header("Player")]
         [Header("   Player Health Bar")]
         [SerializeField] Slider playerHealthBarSlider;
+        [SerializeField] TextMeshProUGUI playerCurrentHealth;
         [Header("   Player Stats")]
         [SerializeField] TextMeshProUGUI playerStatItem;
         Player player;
@@ -62,9 +64,14 @@ namespace UI
         private void UpdatePlayerHealth(float obj)
         {
             playerHealthBarSlider.value = GameManager.Player.CurrentHealth;
+            playerCurrentHealth.text = $"{GameManager.Player.CurrentHealth}/{GameManager.Player.MaxHealth}";
         }
         #endregion
 
+        public void GameOver()
+        {
+            gameOverHUD.SetActive(true);
+        }
         public void GameEnding()
         {
             endingHUD.SetActive(true);

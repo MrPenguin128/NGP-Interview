@@ -6,12 +6,19 @@ public class DamagePopup : MonoBehaviour
     [SerializeField] TextMeshPro text;
     [SerializeField] Color damageColor;
     [SerializeField] Color criticalColor;
+    [SerializeField] Color healColor;
     Color textColor;
     float disappearTimer;
     public static DamagePopup Create(Vector3 position, float damage, bool isCritical)
     {
         var popup = Instantiate(GameAssetsObject.Instance.DamagePopupPrefab, position, GameAssetsObject.Instance.DamagePopupPrefab.transform.rotation);
-        popup.Setup(damage, isCritical);
+        popup.SetupDamage(damage, isCritical);
+        return popup;
+    }
+    public static DamagePopup CreateHealing(Vector3 position, float heal)
+    {
+        var popup = Instantiate(GameAssetsObject.Instance.DamagePopupPrefab, position, GameAssetsObject.Instance.DamagePopupPrefab.transform.rotation);
+        popup.SetupHealing(heal);
         return popup;
     }
 
@@ -30,17 +37,20 @@ public class DamagePopup : MonoBehaviour
                 Destroy(gameObject);
         }
     }
-    public void Setup(float damage, bool isCritical)
+    public void SetupHealing(float heal) => Setup(heal, 1, healColor);
+    public void SetupDamage(float damage, bool isCritical)
     {
-        if (isCritical)
-        {
-            textColor = criticalColor;
-            text.fontSize *= 1.2f;
-        }
+        if(isCritical)
+            Setup(damage, 1.2f, criticalColor);
         else
-            textColor = damageColor;
+            Setup(damage, 1.2f, damageColor);
+    }
+    void Setup(float value, float size, Color color)
+    {
+        text.fontSize *= size;
+        textColor = color;
         text.color = textColor;
-        text.text = damage.ToString("#.#").Replace(',','.');
+        text.text = value.ToString("#.#").Replace(',', '.');
         disappearTimer = 0.5f;
     }
 

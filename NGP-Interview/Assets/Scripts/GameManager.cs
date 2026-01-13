@@ -29,6 +29,7 @@ public class GameManager : Singleton<GameManager>
         if (currentWave < WaveManager.Instance.WaveLenght)
         {
             SaveManager.Instance.Save();
+            player.Heal(9999);
             StartCoroutine(StartWave());
         }
         else
@@ -38,6 +39,10 @@ public class GameManager : Singleton<GameManager>
     {
         yield return new WaitForSeconds(timeBetweenWaves);
         StartCoroutine(WaveManager.Instance.SpawnNextWave());
+    }
+    public void GameOver()
+    {
+        HUDManager.Instance.GameOver();
     }
     void GameEnding()
     {
