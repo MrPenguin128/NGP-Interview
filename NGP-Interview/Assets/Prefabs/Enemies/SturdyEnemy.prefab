@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4510512292704463456}
   - component: {fileID: 2173018507106396426}
   - component: {fileID: 6086354314025913924}
+  - component: {fileID: 7131417983434567727}
   - component: {fileID: 2703812782567621403}
   m_Layer: 6
   m_Name: SturdyEnemy
@@ -103,6 +104,40 @@ MonoBehaviour:
   currentHealth: 0
   baseMaxHealth: 100
   agent: {fileID: 2703812782567621403}
+  dropSystem: {fileID: 7131417983434567727}
+--- !u!114 &7131417983434567727
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1435686815465438144}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1fc37dad565a41428ef5f2f8efcbbfc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DropSystem
+  droppableItems:
+  - item: {fileID: 11400000, guid: f44e63310d910f54a80b69f3d138c3d6, type: 2}
+    weight: 10
+  - item: {fileID: 11400000, guid: f40f0974529f89b4db524a838642118f, type: 2}
+    weight: 10
+  - item: {fileID: 11400000, guid: f5cf0d3746c032a47b36cfbea8c2ec49, type: 2}
+    weight: 10
+  - item: {fileID: 11400000, guid: 0617bd2f7417fe74c873b79887c5bfc7, type: 2}
+    weight: 10
+  - item: {fileID: 11400000, guid: 5febe2f96f2e4034186caf292b4d37b9, type: 2}
+    weight: 5
+  - item: {fileID: 11400000, guid: 087316ef9c5f6ec4ea28ec987b5b6d86, type: 2}
+    weight: 5
+  - item: {fileID: 11400000, guid: 095987687db2e854ab9c1104b79c9172, type: 2}
+    weight: 5
+  - item: {fileID: 11400000, guid: f86e58ad3610e5a4d877683c5f42515f, type: 2}
+    weight: 5
+  dropRepetitions: 1
+  dropChance: 50
+  minDropAmount: 1
+  maxDropAmount: 1
 --- !u!195 &2703812782567621403
 NavMeshAgent:
   m_ObjectHideFlags: 0

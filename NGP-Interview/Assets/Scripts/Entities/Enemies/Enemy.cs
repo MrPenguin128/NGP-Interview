@@ -12,6 +12,7 @@ namespace Entities.Enemies
         EnemyDataObject data;
         [Header("Components")]
         [SerializeField] NavMeshAgent agent;
+        [SerializeField] DropSystem dropSystem;
         Transform target;
         float nextAttackTime;
 
@@ -58,7 +59,7 @@ namespace Entities.Enemies
             WaveManager.Instance.OnEnemyKilled(data, this);
             gameObject.SetActive(false);
             enabled = false;
-            GameManager.Player.Inventory.AddItem(ItemDatabase.Instance.GetRandom().Id, Random.Range(0,200));
+            dropSystem.DropItem();
         }
         #region Stats
         protected virtual void OnChangeMoveSpeed(float obj)
@@ -69,8 +70,11 @@ namespace Entities.Enemies
         #region Attack Behaviour
         protected virtual void Chase()
         {
-            agent.isStopped = false;
-            agent.SetDestination(target.position);
+            if (!agent.pathPending && (agent.destination - target.position).sqrMagnitude > 0.5f)
+            {
+                agent.isStopped = false;
+                agent.SetDestination(target.position);
+            }
         }
 
         protected virtual void Attack()

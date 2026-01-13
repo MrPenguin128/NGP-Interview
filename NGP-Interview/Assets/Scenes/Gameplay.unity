@@ -2588,6 +2588,7 @@ GameObject:
   - component: {fileID: 1109500165}
   - component: {fileID: 1109500160}
   - component: {fileID: 1109500166}
+  - component: {fileID: 1109500167}
   - component: {fileID: 1109500164}
   m_Layer: 7
   m_Name: Player
@@ -2773,6 +2774,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: e744f953-c819-447e-9d57-48bac5d1f10b
     m_ActionName: 'Gameplay/ToggleInventory[/Keyboard/tab]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1109500167}
+        m_TargetAssemblyTypeName: Entities.Player.InteractionHandler, Assembly-CSharp
+        m_MethodName: OnInteract
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 8204cbed-70b7-4a6d-99a2-89b902ddb40f
+    m_ActionName: 'Gameplay/Interact[/Keyboard/e]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Gameplay
@@ -2816,6 +2833,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Inventory.Inventory
   slotCount: 30
+--- !u!114 &1109500167
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1109500159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e844b412fb769eb42a50e9d01446506a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Entities.Player.InteractionHandler
+  checkRadius: 3
+  interactionLayer:
+    serializedVersion: 2
+    m_Bits: 512
 --- !u!1 &1125510892
 GameObject:
   m_ObjectHideFlags: 0
@@ -3600,7 +3633,7 @@ GameObject:
   - component: {fileID: 1496850320}
   - component: {fileID: 1496850319}
   - component: {fileID: 1496850323}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}

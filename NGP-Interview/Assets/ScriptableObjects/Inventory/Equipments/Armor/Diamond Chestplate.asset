@@ -22,6 +22,7 @@ MonoBehaviour:
     Armor: +{[AMR]}'
   Stackable: 0
   MaxStack: 1
+  itemPrefab: {fileID: 8236817440394099195, guid: 17572e862916a5844b63983a01adbd4c, type: 3}
   type: 1
   modifiers:
   - stat: 0

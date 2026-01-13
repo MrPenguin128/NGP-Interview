@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4510512292704463456}
   - component: {fileID: 2173018507106396426}
   - component: {fileID: 6086354314025913924}
+  - component: {fileID: 619966714178113639}
   - component: {fileID: 2703812782567621403}
   m_Layer: 6
   m_Name: DefaultEnemy
@@ -99,10 +100,40 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Entities.Enemies.BaseEnemy
   stats:
-    stats: []
+    statsList: []
   currentHealth: 0
   baseMaxHealth: 100
   agent: {fileID: 2703812782567621403}
+  dropSystem: {fileID: 619966714178113639}
+--- !u!114 &619966714178113639
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1435686815465438144}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1fc37dad565a41428ef5f2f8efcbbfc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DropSystem
+  droppableItems:
+  - item: {fileID: 11400000, guid: aae5334e7c020e54bbe59a3468cd25cf, type: 2}
+    weight: 10
+  - item: {fileID: 11400000, guid: 0624052a46b834b4ebb97789d4a807ff, type: 2}
+    weight: 10
+  - item: {fileID: 11400000, guid: d1b98f5b401a37e4e8cab4af8e28d639, type: 2}
+    weight: 3
+  - item: {fileID: 11400000, guid: 3823e23abe2e08a4bab68f6679500d1b, type: 2}
+    weight: 3
+  - item: {fileID: 11400000, guid: f44e63310d910f54a80b69f3d138c3d6, type: 2}
+    weight: 1
+  - item: {fileID: 11400000, guid: f5cf0d3746c032a47b36cfbea8c2ec49, type: 2}
+    weight: 1
+  dropRepetitions: 2
+  dropChance: 20
+  minDropAmount: 1
+  maxDropAmount: 3
 --- !u!195 &2703812782567621403
 NavMeshAgent:
   m_ObjectHideFlags: 0

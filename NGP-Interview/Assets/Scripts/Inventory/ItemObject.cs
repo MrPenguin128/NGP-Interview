@@ -14,6 +14,8 @@ namespace InventorySystem
         [Header("Stack Settings")]
         public bool Stackable = true;
         public int MaxStack = 99;
+        [Header("Drop Settings")]
+        public ItemPickup itemPrefab;
 
 #if UNITY_EDITOR
         private void OnValidate()

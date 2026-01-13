@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4510512292704463456}
   - component: {fileID: 2173018507106396426}
   - component: {fileID: 6086354314025913924}
+  - component: {fileID: -6952965696147922054}
   - component: {fileID: 2703812782567621403}
   m_Layer: 6
   m_Name: FastEnemy
@@ -103,6 +104,36 @@ MonoBehaviour:
   currentHealth: 0
   baseMaxHealth: 100
   agent: {fileID: 2703812782567621403}
+  dropSystem: {fileID: -6952965696147922054}
+--- !u!114 &-6952965696147922054
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1435686815465438144}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1fc37dad565a41428ef5f2f8efcbbfc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DropSystem
+  droppableItems:
+  - item: {fileID: 11400000, guid: aae5334e7c020e54bbe59a3468cd25cf, type: 2}
+    weight: 10
+  - item: {fileID: 11400000, guid: 0624052a46b834b4ebb97789d4a807ff, type: 2}
+    weight: 10
+  - item: {fileID: 11400000, guid: 21d37269ef36c1a4abba8d1915a5dcba, type: 2}
+    weight: 3
+  - item: {fileID: 11400000, guid: ce37cebca4563a54fa33873c2365f056, type: 2}
+    weight: 3
+  - item: {fileID: 11400000, guid: f40f0974529f89b4db524a838642118f, type: 2}
+    weight: 1
+  - item: {fileID: 11400000, guid: 0617bd2f7417fe74c873b79887c5bfc7, type: 2}
+    weight: 1
+  dropRepetitions: 2
+  dropChance: 20
+  minDropAmount: 1
+  maxDropAmount: 3
 --- !u!195 &2703812782567621403
 NavMeshAgent:
   m_ObjectHideFlags: 0

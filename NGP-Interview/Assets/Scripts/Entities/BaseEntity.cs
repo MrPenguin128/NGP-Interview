@@ -12,7 +12,7 @@ namespace Entities
         [SerializeField] protected Stats stats = new Stats();
         [SerializeField] private float currentHealth;
         [SerializeField] protected float baseMaxHealth;
-
+        bool dead;
         public float MaxHealth => GetStatValue(StatType.MaxHealth);
 
         public float CurrentHealth 
@@ -58,7 +58,6 @@ namespace Entities
         public virtual void TakeDamage(float amount, bool isCritical)
         {
             CurrentHealth -= amount;
-            Debug.Log($"Ouch! current health: {CurrentHealth} {isCritical}");
             OnDamageTaken?.Invoke(amount);
             DamagePopup.Create(transform.position, amount, isCritical);
             if (CurrentHealth <= 0f)
@@ -67,6 +66,8 @@ namespace Entities
 
         protected virtual void Die()
         {
+            if (dead) return;
+            dead = true;
             OnDeath?.Invoke();
         }
         #endregion

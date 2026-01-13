@@ -27,6 +27,7 @@ MonoBehaviour:
     Critical Damage: {[CRD]}'
   Stackable: 0
   MaxStack: 1
+  itemPrefab: {fileID: 9106382040477917834, guid: 6f74f0f9d433c4145a59d2471db81c54, type: 3}
   type: 0
   modifiers:
   - stat: 1
